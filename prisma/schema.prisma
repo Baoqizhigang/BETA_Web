@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model User {
+  id             String   @id @default(uuid())
+  email          String   @unique
+  name           String?
+  linkedinUrl    String?
+  xHandle        String?
+  githubUrl      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  projects       Project[]
+  interests      InvestmentInterest[]
+  interactions   BetaInteraction[]
+  orders         Order[]
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  embedUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+
+  interactions BetaInteraction[]
+  interests    InvestmentInterest[]
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  location    String?
+  startTime   DateTime
+  endTime     DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model InvestmentInterest {
+  id          String   @id @default(uuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  project     Project? @relation(fields: [projectId], references: [id])
+  projectId   String?
+
+  message     String?
+  createdAt   DateTime @default(now())
+  walletAddr  String?
+  futureToken String?
+}
+
+model BetaInteraction {
+  id          String   @id @default(uuid())
+  user        User?    @relation(fields: [userId], references: [id])
+  userId      String?
+  project     Project? @relation(fields: [projectId], references: [id])
+  projectId   String?
+
+  type        InteractionType
+  createdAt   DateTime @default(now())
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Int
+  currency    String   @default("usd")
+  isActive    Boolean  @default(true)
+  type        ProductType @default(SERVICE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orders      Order[]
+}
+
+model Order {
+  id          String   @id @default(uuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  product     Product  @relation(fields: [productId], references: [id])
+  productId   String
+  
+  status      OrderStatus @default(PENDING)
+  totalAmount Int
+  stripePaymentId String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum ProductType {
+  COURSE
+  SERVICE
+  DIGITAL_DOWNLOAD
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum InteractionType {
+  VIEW
+  CLICK
+  LIKE
+}

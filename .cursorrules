@@ -1,0 +1,52 @@
+# Engineering Guidelines - BETA Silicon Valley Stack
+
+1. NO JUNIOR COMMENTS
+   - Never write comments like `// function to fetch data`.
+   - Only comment on business-critical logic or architectural reasoning.
+   - If it’s obvious, don’t explain it.
+
+2. TRUST UPSTREAM
+   - If a route requires auth, DO NOT recheck user ID or session.
+   - Eliminate all redundant null-checks or conditions already guaranteed by middleware/guards.
+
+3. ZERO-TOLERANCE FOR TYPE BYPASSING
+   - DO NOT use `@ts-ignore`, `@ts-expect-error`, or `any`.
+   - All entities, interfaces, and enums must be defined explicitly in `types/index.ts` or auto-generated via Prisma.
+   - Break builds if necessary to enforce types. Future devs must fix upstream, not patch downstream.
+
+4. CONSISTENCY ABOVE ALL
+   - Use strict ESLint + Prettier + import ordering.
+   - Prefer functional components only. No class components.
+   - Naming conventions:
+     - Components: `PascalCase`
+     - Hooks: `useCamelCase`
+     - Types/Interfaces: `PascalCase`
+     - DB models: `PascalCase`
+     - API routes: `kebab-case`
+
+---
+
+# AI Development Principles - Golden Rules
+
+5. STATE AWARENESS
+   - ALWAYS read `PROGRESS.md` before starting any task.
+   - Check current phase status and recent context.
+   - Update `PROGRESS.md` when completing major milestones.
+
+6. WSL2 NATIVE ENVIRONMENT
+   - All paths use Linux style (`/home/qiao_liu/projects/BETA_Web`).
+   - Check file permissions when creating new files.
+   - Use `wsl bash -c` for shell commands from Windows.
+   - Verify Node.js and npm are accessible in WSL context.
+
+7. GIT RIGOR
+   - Commit often with semantic prefixes: `feat:`, `fix:`, `docs:`, `refactor:`.
+   - Example: `feat: add user authentication flow`.
+   - If 2 attempts to fix an issue fail, rollback and reassess approach.
+   - Never commit broken code or failing tests.
+
+8. MODULE PATHING
+   - Use root-level `/app` and `/lib` directories (NOT `/src`).
+   - Import aliases use `@/` prefix (configured in tsconfig.json).
+   - Example: `import { prisma } from "@/lib/prisma"`.
+   - Keep components organized: `@/components/ui`, `@/components/creative`, `@/components/ecommerce`.
