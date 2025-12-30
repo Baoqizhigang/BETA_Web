@@ -50,3 +50,49 @@
    - Import aliases use `@/` prefix (configured in tsconfig.json).
    - Example: `import { prisma } from "@/lib/prisma"`.
    - Keep components organized: `@/components/ui`, `@/components/creative`, `@/components/ecommerce`.
+
+---
+
+# Phase 2 Development Principles
+
+9. ARCHITECT MODE
+   - For complex logic (payments, streams, auth flows), create `architecture_decision.md` FIRST.
+   - Check compatibility with UE5 Pixel Streaming / Binary Data when applicable.
+   - Document trade-offs and alternatives before implementation.
+
+10. REFACTOR TRIGGER
+    - If a file exceeds 300 lines, PROPOSE atomic split immediately.
+    - Split by concern: hooks, utils, constants, types, components.
+    - No god files. No monolithic components.
+
+11. VISUAL PRIORITY (React Bits First)
+    - Check React Bits library FIRST for any visual/interaction component.
+    - Only fallback to Shadcn/ui for raw inputs, forms, and data tables.
+    - Order: React Bits → Shadcn → Custom (last resort).
+
+12. SELF-HEAL (TDD)
+    - If `npm run test` fails, analyze logs → fix → retry.
+    - DO NOT commit until tests pass (green).
+    - Write tests for critical paths: DB operations, auth, payments.
+
+13. ANTI-ENTROPY
+    - If 2 consecutive fix attempts fail, execute: `git reset --hard HEAD`.
+    - Rollback, reassess approach, and document failure in `PROGRESS.md`.
+    - Fresh start > bandaid fixes.
+
+14. MODULAR ISOLATION (DDD)
+    - Strictly separate: Business Logic (`lib/modules`) | UI (`components`) | Routing (`app`).
+    - DO NOT import UI components into domain logic.
+    - DO NOT import domain logic directly into route handlers - use service layers.
+    - Adapters (`lib/adapters`) are the ONLY bridge to external systems (UE5, APIs).
+
+15. ZERO-TRUST SYNC
+    - BEFORE modifying any file, MUST run: `git pull origin main` (or current branch).
+    - Ensure local environment is 100% aligned with remote.
+    - Never assume local is up-to-date.
+
+16. VISUAL VERIFICATION (Preview First)
+    - Do NOT trust code just because it compiles.
+    - For any UI change, explicitly ask: "Please check the Antigravity Preview pane."
+    - New pages MUST render without 500/404 errors before marking task complete.
+    - Visual bugs are bugs - treat them with same priority as logic bugs.

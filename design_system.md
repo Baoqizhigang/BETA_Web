@@ -68,6 +68,10 @@ Our visual identity is inspired by light refracting through a prism: deep void b
 
 ## 🧩 Component Strategy
 
+> **Priority 1: React Bits** (Visuals/Interaction)  
+> **Priority 2: Shadcn/ui** (Forms/Structure)  
+> **Do not reinvent wheels.**
+
 ### Shadcn/ui (The Structure)
 **Purpose**: Clean, functional components with minimal styling
 

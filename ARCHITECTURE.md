@@ -156,8 +156,38 @@ To support future monetization strategies (e.g. paid hackathon entries, premium 
 
 These modules are not active in the Phase 1 MVP but are scaffolded for Phase 2+ scalability.
 
+---
 
-/
+### 🎮 UE5 Integration Strategy
+
+**Protocol**: JSON-RPC 2.0 over WebSocket
+
+The `lib/adapters/ue5/` directory serves as the **Anti-Corruption Layer** between the web frontend and Unreal Engine 5 backend.
+
+**Communication Flow**:
+```
+Next.js Frontend <--WebSocket--> UE5 Adapter <--JSON-RPC--> UE5 Backend
+```
+
+**Key Interfaces**:
+| Interface | Direction | Purpose |
+|-----------|-----------|---------|
+| `connect()` | Web → UE5 | Establish WebSocket connection |
+| `stream.start()` | Web → UE5 | Initialize Pixel Streaming |
+| `input.relay()` | Web → UE5 | Forward mouse/keyboard events |
+| `event.subscribe()` | UE5 → Web | Listen for UE5 events |
+
+**Binary Data Handling**:
+- Asset streaming uses separate binary WebSocket channel
+- File transfers use chunked base64 encoding in JSON-RPC
+- Large payloads trigger automatic chunking (>64KB)
+
+**Decoupling Rules**:
+1. UI components NEVER import from `lib/adapters/ue5` directly
+2. Use React context/hooks as abstraction layer
+3. All UE5 types defined in `lib/adapters/ue5/types.ts`
+
+
 ├── app/
 │   ├── layout.tsx
 │   ├── page.tsx
@@ -207,9 +237,24 @@ These modules are not active in the Phase 1 MVP but are scaffolded for Phase 2+ 
 │       └── CartDrawer.tsx
 │
 ├── lib/
-│   ├── supabase.ts
 │   ├── prisma.ts
-│   └── stripe.ts
+│   ├── supabase.ts
+│   ├── stripe.ts
+│   │
+│   ├── modules/                         # 🆕 DDD Domain Modules
+│   │   ├── video/                       # YouTube/embed logic
+│   │   │   └── index.ts
+│   │   ├── commerce/                    # Amazon/Shopify logic
+│   │   │   └── index.ts
+│   │   ├── social/                      # Reddit/Community logic
+│   │   │   └── index.ts
+│   │   └── web3/                        # Smart Contracts
+│   │       └── index.ts
+│   │
+│   └── adapters/                        # 🆕 Anti-Corruption Layers
+│       └── ue5/                         # Unreal Engine integration
+│           ├── index.ts
+│           └── README.md
 │
 ├── types/
 │   └── index.ts
