@@ -17,22 +17,28 @@ export default function Navbar() {
                     {/* Center Links */}
                     <div className="hidden md:flex items-center space-x-8">
                         <Link
-                            href="/projects"
+                            href="/"
                             className="text-gray-400 hover:text-white transition-colors duration-200"
                         >
-                            Projects
+                            HOME
                         </Link>
                         <Link
                             href="/events"
                             className="text-gray-400 hover:text-white transition-colors duration-200"
                         >
-                            Events
+                            EVENTS
                         </Link>
                         <Link
-                            href="/products"
+                            href="/about"
                             className="text-gray-400 hover:text-white transition-colors duration-200"
                         >
-                            Products
+                            ABOUT
+                        </Link>
+                        <Link
+                            href="/join"
+                            className="text-gray-400 hover:text-white transition-colors duration-200"
+                        >
+                            JOIN
                         </Link>
                     </div>
 
