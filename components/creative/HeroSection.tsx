@@ -153,7 +153,7 @@ export default function HeroSection() {
             </div>
 
             {/* Layer 2: Content (Bottom) */}
-            <div className="absolute bottom-10 z-10 text-center px-4 max-w-8xl mx-auto w-full translate-y-[15%] sm:translate-y-[10%]">
+            <div className="absolute bottom-10 z-10 text-center px-4 max-w-8xl mx-auto w-full translate-y-0">
                 <motion.h1
                     className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-tight"
                     animate={{ opacity: [0.3, 0.8, 0.9, 0.3] }}
