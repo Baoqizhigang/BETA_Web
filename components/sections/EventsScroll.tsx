@@ -20,14 +20,14 @@ export default function EventsScroll() {
     const marqueeEvents = [...EVENTS, ...EVENTS];
 
     return (
-        <section className="relative w-full h-[500px] bg-[#030303] overflow-hidden flex items-center [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+        <section className="relative w-full h-[500px] bg-transparent overflow-hidden flex items-center [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
             {/* Layer 1: Background Light (Horizontal LightPillar) */}
             <div className="absolute inset-0 z-0">
                 <LightPillar
                     pillarRotation={360}
                     pillarWidth={18}
-                    pillarHeight={20}
-                    intensity={0.4}
+                    pillarHeight={50}
+                    intensity={0.5}
                     rotationSpeed={1.5}
                     topColor="#172554"
                     middleColor="#1a0c55"

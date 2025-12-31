@@ -8,7 +8,10 @@ export default function Home() {
       <HeroSection />
 
       {/* Additional sections will go here */}
-      <EventsScroll />
+      {/* Additional sections will go here */}
+      <div className="relative z-10 -mt-32">
+        <EventsScroll />
+      </div>
       <Partners />
 
       {/* Footer */}
