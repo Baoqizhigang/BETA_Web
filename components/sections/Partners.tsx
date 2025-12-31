@@ -4,13 +4,18 @@ const partners = [
     "Google Cloud",
     "AWS",
     "Linux Foundation",
+    "manus",
+    "VELDA",
+    "ElevenLabs",
+    "NEO",
     "Perplexity",
     "Anthropic",
     "OpenAI",
     "BETA University",
     "Berkeley",
     "Stanford",
-    "MIT"
+    "MIT",
+    "Duke"
 ];
 
 export default function Partners() {

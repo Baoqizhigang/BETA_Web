@@ -28,7 +28,7 @@ export default function SpotlightCard({ children, className = "" }: { children: 
                 className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
                 style={{
                     opacity,
-                    background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.1), transparent 40%)`,
+                    background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.1), transparent 70%)`,
                 }}
             />
             <div className="relative h-full">{children}</div>

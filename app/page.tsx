@@ -9,7 +9,7 @@ export default function Home() {
 
       {/* Additional sections will go here */}
       {/* Additional sections will go here */}
-      <div className="relative z-10 -mt-32">
+      <div className="relative z-10 -mt-20">
         <EventsScroll />
       </div>
       <Partners />
