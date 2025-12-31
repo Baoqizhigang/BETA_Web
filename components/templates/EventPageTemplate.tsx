@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/layout/Navbar';
 import LightRays from '@/components/creative/LightRays';
+import ShinyText from '@/components/creative/ShinyText';
 
 interface EventPageTemplateProps {
     title?: string;
@@ -62,8 +63,18 @@ export default function EventPageTemplate({
                         <span className="text-gray-400 text-sm">{location}</span>
                     </div>
 
-                    <h1 className="text-5xl md:text-8xl font-bold text-white tracking-tighter drop-shadow-2xl">
-                        {title}
+                    <h1 className="text-5xl md:text-8xl font-bold tracking-tighter drop-shadow-2xl">
+                        <ShinyText
+                            text={title}
+                            disabled={false}
+                            speed={4}
+                            delay={1.1}
+                            spread={65}
+                            color="#707070"
+                            shineColor="#00ffee"
+                            yoyo={true}
+                            className="block"
+                        />
                     </h1>
 
                     <p className="text-lg md:text-xl text-gray-400 leading-relaxed font-light max-w-2xl mx-auto">
