@@ -102,3 +102,9 @@
     - Source Code First: Always ask the user for the official source code or a reference implementation (e.g., from React Bits, Aceternity, Magic UI).
     - Porting over Creating: Your role is to Integrate and Port existing verified code into our Next.js stack, not to Create new math/algorithms.
     - Strict Math Preservation: When porting shaders, do not alter the mathematical logic (noise functions, sin/cos waves) unless explicitly instructed.
+
+18. 📂 FILE STRUCTURE & ROUTING
+    - 4. Explicit Routing vs. Dynamic Routing:
+        - Default to Explicit Folders: For major landing pages (e.g., a specific Hackathon, a Summit), ALWAYS create an explicit folder path (e.g., app/events/scoop-ai-hackathon/page.tsx).
+        - Avoid Premature Abstraction: Do not use dynamic routes (like [slug]) unless we are explicitly building a database-driven CMS where all pages share the exact same layout and logic.
+        - Reasoning: We prioritize design flexibility and maintainability over code reuse for flagship pages.
