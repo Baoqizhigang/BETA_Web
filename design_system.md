@@ -261,3 +261,19 @@ theme: {
   }
 }
 ```
+
+---
+
+## 🎨 Template Standards: Event Pages
+
+### Base Component
+All event pages must use the `EventPageTemplate` (or the standardized `LightRays` configuration).
+
+### Visual Signature
+The "Scoop AI" look is defined by:
+- **Background**: `bg-black`
+- **Effect**: `LightRays` (Cyan #00ffff, Speed 1.5, Spread 0.8)
+- **Typography**: Centered, Bold Sans-serif Title, Monospace Meta-data.
+
+### Constraint
+Do not deviate from this visual structure for new event pages to ensure brand consistency.

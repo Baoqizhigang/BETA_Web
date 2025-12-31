@@ -96,3 +96,9 @@
     - For any UI change, explicitly ask: "Please check the Antigravity Preview pane."
     - New pages MUST render without 500/404 errors before marking task complete.
     - Visual bugs are bugs - treat them with same priority as logic bugs.
+
+17. ⚡ Workflow Protocol: Complex Visuals & Shaders
+    - No Reinventing the Wheel: When requested to implement complex visual effects (WebGL, Shaders, Canvas, Fluid simulation), NEVER attempt to write the algorithm from scratch based on text descriptions.
+    - Source Code First: Always ask the user for the official source code or a reference implementation (e.g., from React Bits, Aceternity, Magic UI).
+    - Porting over Creating: Your role is to Integrate and Port existing verified code into our Next.js stack, not to Create new math/algorithms.
+    - Strict Math Preservation: When porting shaders, do not alter the mathematical logic (noise functions, sin/cos waves) unless explicitly instructed.
