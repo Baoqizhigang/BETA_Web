@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import LightRays from '@/components/creative/LightRays';
 import ShinyText from '@/components/creative/ShinyText';
@@ -11,6 +11,9 @@ interface EventPageTemplateProps {
     description?: string;
     ctaText?: string;
     videoUrl?: string;
+    posterLeftSrc?: string;
+    posterRightSrc?: string;
+    children?: React.ReactNode;
 }
 
 const getYouTubeId = (url: string) => {
@@ -25,8 +28,12 @@ export default function EventPageTemplate({
     location = "To Be Announced",
     description = "Event details coming soon.",
     ctaText = "Register Now",
-    videoUrl
+    videoUrl,
+    posterLeftSrc,
+    posterRightSrc,
+    children
 }: EventPageTemplateProps) {
+    const [lightboxImg, setLightboxImg] = useState<string | null>(null);
     const videoId = videoUrl ? getYouTubeId(videoUrl) : null;
 
     return (
@@ -82,24 +89,64 @@ export default function EventPageTemplate({
                     </p>
                 </div>
 
-                {/* YouTube Video Section */}
+                {/* Triptych Media Section */}
                 {videoId && (
-                    <div className="mt-12 w-full max-w-2xl mx-auto animate-fade-in-up">
-                        <div className="relative aspect-video rounded-2xl overflow-hidden shadow-[0_0_50px_-12px_rgba(6,182,212,0.3)] border border-white/10 bg-gray-900/50">
-                            <iframe
-                                width="100%"
-                                height="100%"
-                                src={`https://www.youtube.com/embed/${videoId}`}
-                                title="Event Video"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                className="absolute inset-0"
-                            ></iframe>
+                    <div className="mt-12 w-full flex flex-col xl:flex-row items-center justify-center gap-8 animate-fade-in-up">
+
+                        {/* Left Poster */}
+                        {posterLeftSrc && (
+                            <img
+                                src={posterLeftSrc}
+                                alt="Event Poster Left"
+                                className="h-64 xl:h-[378px] w-auto rounded-xl shadow-[0_0_30px_rgba(0,255,255,0.2)] transition-transform duration-300 hover:scale-[1.2] cursor-zoom-in z-20 relative object-cover"
+                                onClick={() => setLightboxImg(posterLeftSrc)}
+                            />
+                        )}
+
+                        {/* Video */}
+                        <div className="w-full max-w-2xl shrink-0">
+                            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-[0_0_50px_-12px_rgba(6,182,212,0.3)] border border-white/10 bg-gray-900/50">
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    src={`https://www.youtube.com/embed/${videoId}`}
+                                    title="Event Video"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    className="absolute inset-0"
+                                ></iframe>
+                            </div>
                         </div>
+
+                        {/* Right Poster */}
+                        {posterRightSrc && (
+                            <img
+                                src={posterRightSrc}
+                                alt="Event Poster Right"
+                                className="h-64 xl:h-[378px] w-auto rounded-xl shadow-[0_0_30px_rgba(0,255,255,0.2)] transition-transform duration-300 hover:scale-[1.2] cursor-zoom-in z-20 relative object-cover"
+                                onClick={() => setLightboxImg(posterRightSrc)}
+                            />
+                        )}
                     </div>
                 )}
+
+                {/* Additional Content (Grid) */}
+                {children}
             </div>
+
+            {/* Lightbox Overlay */}
+            {lightboxImg && (
+                <div
+                    className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center cursor-zoom-out"
+                    onClick={() => setLightboxImg(null)}
+                >
+                    <img
+                        src={lightboxImg}
+                        alt="Full Screen Poster"
+                        className="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl rounded-lg"
+                    />
+                </div>
+            )}
         </main>
     );
 }
