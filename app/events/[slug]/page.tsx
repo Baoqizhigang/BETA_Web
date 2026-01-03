@@ -26,7 +26,7 @@ export default async function EventPage({ params }: Props) {
                     raysSpeed={0.2}
                     rayLength={0.6}
                     lightSpread={0.6}
-                    intensity={1.0}
+                //intensity={1.0}
                 />
             </div>
 

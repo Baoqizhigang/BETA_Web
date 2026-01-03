@@ -46,6 +46,7 @@ interface LightRaysProps {
     mouseInfluence?: number;
     noiseAmount?: number;
     distortion?: number;
+    intensity?: number;
     className?: string;
 }
 
@@ -62,6 +63,7 @@ const LightRays = ({
     mouseInfluence = 0.1,
     noiseAmount = 0.2,
     distortion = 0.02,
+    intensity = 1.0,
     className = ''
 }: LightRaysProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -411,7 +413,7 @@ const LightRays = ({
         }
     }, [followMouse]);
 
-    return <div ref={containerRef} className={`light-rays-container ${className}`.trim()} />;
+    return <div ref={containerRef} className={`light-rays-container ${className}`.trim()} style={{ opacity: intensity }} />;
 };
 
 export default LightRays;

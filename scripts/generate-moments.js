@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const IMAGES_DIR = path.join(__dirname, '../public/images/ScoopAIHackathon/moments');
+const IMAGES_DIR = path.join(__dirname, '../public/images/ScoopAIHackathon/moments-optimized');
 const OUTPUT_DIR = path.join(__dirname, '../src/data');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'moments.json');
 

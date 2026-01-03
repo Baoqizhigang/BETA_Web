@@ -4,10 +4,13 @@ import EventPageTemplate from '@/components/templates/EventPageTemplate';
 import BentoCard from '@/components/creative/BentoCard';
 import ShinyText from '@/components/creative/ShinyText';
 import Masonry from '@/components/creative/Masonry';
-import { useState, useEffect } from 'react';
-import momentsData from '@/data/moments.json';
+import { useState, useEffect, useMemo } from 'react';
+import momentsData from '@/src/data/moments.json';
 
 // 1. Configuration Constants
+const INITIAL_VISIBLE_COUNT = 12;
+const LOAD_MORE_STEP = 6;
+
 const THEMES = {
     CYAN: { color: "#26F0FF", speed: 9, spread: 85 },
     GREEN: { color: "#0DFC96", speed: 4, spread: 45 },
@@ -51,6 +54,10 @@ const projects = [
 
 export default function ScoopAIHackathonPage() {
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+    const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
+
+    // Filter/Slice data based on visibleCount
+    const visibleMoments = useMemo(() => momentsData.slice(0, visibleCount), [visibleCount]);
 
     // Lightbox Navigation Logic
     const nextImage = () => setLightboxIndex((prev) => (prev! + 1) % momentsData.length);
@@ -136,17 +143,29 @@ export default function ScoopAIHackathonPage() {
             </div>
 
             {/* Masonry Gallery Section */}
-            <div className="relative z-10 w-full max-w-[97%] mx-auto mt-0 mb-20">
+            <div className="relative z-10 w-full max-w-[97%] mx-auto mt-0 mb-20 flex flex-col items-center">
                 <h2 className="text-4xl font-bold text-center mb-12 text-white/80 tracking-widest">
                     HACKATHON MOMENTS
                 </h2>
 
-                <Masonry
-                    items={momentsData}
-                    stagger={0.02}
-                    duration={0.5}
-                    onItemClick={(item, index) => setLightboxIndex(index)}
-                />
+                <div className="w-full">
+                    <Masonry
+                        items={visibleMoments}
+                        stagger={0.02}
+                        duration={0.5}
+                        onItemClick={(item, index) => setLightboxIndex(index)}
+                    />
+                </div>
+
+                {/* Load More Button */}
+                {visibleCount < momentsData.length && (
+                    <button
+                        onClick={() => setVisibleCount(prev => prev + LOAD_MORE_STEP)}
+                        className="mt-12 px-8 py-3 text-sm font-medium text-white tracking-widest bg-white/10 backdrop-blur-md border border-white/20 rounded-full hover:scale-105 transition-all duration-300 pointer-events-auto"
+                    >
+                        LOAD MORE MEMORIES ({Math.min(visibleCount, momentsData.length)} / {momentsData.length})
+                    </button>
+                )}
             </div>
 
             {/* Lightbox Overlay */}
