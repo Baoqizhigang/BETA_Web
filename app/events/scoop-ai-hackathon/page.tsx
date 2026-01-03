@@ -1,7 +1,10 @@
+"use client";
 import Link from 'next/link';
 import EventPageTemplate from '@/components/templates/EventPageTemplate';
 import BentoCard from '@/components/creative/BentoCard';
 import ShinyText from '@/components/creative/ShinyText';
+import Masonry from '@/components/creative/Masonry';
+import { useState, useEffect } from 'react';
 
 // 1. Configuration Constants
 const THEMES = {
@@ -45,7 +48,33 @@ const projects = [
     }
 ];
 
+// Generate Dummy Images
+const galleryImages = Array.from({ length: 40 }).map((_, i) => ({
+    id: i,
+    img: i % 2 === 0 ? "/images/ScoopAIHackathon/ScoopAIHackathonPoseterLeft.jpg" : "/images/ScoopAIHackathon/ScoopAIHackathonPoseterRight.jpg",
+    height: Math.floor(Math.random() * (600 - 300 + 1) + 300), // Random height for masonry effect
+    url: "#"
+}));
+
 export default function ScoopAIHackathonPage() {
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+    // Lightbox Navigation Logic
+    const nextImage = () => setLightboxIndex((prev) => (prev! + 1) % galleryImages.length);
+    const prevImage = () => setLightboxIndex((prev) => (prev! - 1 + galleryImages.length) % galleryImages.length);
+
+    // Keydown listener for Lightbox
+    useEffect(() => {
+        const handleKey = (e: KeyboardEvent) => {
+            if (lightboxIndex === null) return;
+            if (e.key === "Escape") setLightboxIndex(null);
+            if (e.key === "ArrowRight") nextImage();
+            if (e.key === "ArrowLeft") prevImage();
+        };
+        window.addEventListener("keydown", handleKey);
+        return () => window.removeEventListener("keydown", handleKey);
+    }, [lightboxIndex]);
+
     return (
         <EventPageTemplate
             title="SCOOP AI HACKATHON"
@@ -108,6 +137,33 @@ export default function ScoopAIHackathonPage() {
                     })}
                 </div>
             </div>
+
+            {/* Masonry Gallery Section */}
+            <div className="relative z-10 w-full max-w-[95%] mx-auto mt-32 mb-20">
+                <h2 className="text-4xl font-bold text-center mb-12 text-white/80 tracking-widest">
+                    HACKATHON MOMENTS
+                </h2>
+
+                <Masonry
+                    items={galleryImages}
+                    stagger={0.02}
+                    duration={0.5}
+                    onItemClick={(item, index) => setLightboxIndex(index)}
+                />
+            </div>
+
+            {/* Lightbox Overlay */}
+            {lightboxIndex !== null && (
+                <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center" onClick={() => setLightboxIndex(null)}>
+                    {/* Main Image */}
+                    <img
+                        src={galleryImages[lightboxIndex].img}
+                        className="max-h-[90vh] max-w-[90vw] object-contain rounded-md shadow-[0_0_50px_rgba(0,255,255,0.2)]"
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                    {/* Navigation Controls (Arrows & Close) could go here */}
+                </div>
+            )}
         </EventPageTemplate>
     );
 }

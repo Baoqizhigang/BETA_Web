@@ -108,3 +108,11 @@
         - Default to Explicit Folders: For major landing pages (e.g., a specific Hackathon, a Summit), ALWAYS create an explicit folder path (e.g., app/events/scoop-ai-hackathon/page.tsx).
         - Avoid Premature Abstraction: Do not use dynamic routes (like [slug]) unless we are explicitly building a database-driven CMS where all pages share the exact same layout and logic.
         - Reasoning: We prioritize design flexibility and maintainability over code reuse for flagship pages.
+
+19. ⚡️ Next.js App Router Mandates
+    - "use client" Rule (CRITICAL): Before generating any code, scan for usage of:
+        1. React Hooks (e.g., `useState`, `useEffect`, `useRef`, `useCallback`, `useContext`).
+        2. Event Handlers (e.g., `onClick`, `onChange`, `onSubmit`).
+        3. Browser-only APIs (e.g., `window`, `document`, `localStorage`).
+        - IF FOUND: You MUST insert "use client"; as the very first line of the file.
+        - NO EXCEPTIONS: Do not assume the user will remind you. If it interacts, it is a Client Component.
