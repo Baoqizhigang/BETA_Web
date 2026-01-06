@@ -13,6 +13,9 @@ interface EventPageTemplateProps {
     videoUrl?: string;
     posterLeftSrc?: string;
     posterRightSrc?: string;
+    posterLeftHref?: string;
+    posterRightHref?: string;
+    topLabel?: React.ReactNode;
     children?: React.ReactNode;
 }
 
@@ -31,6 +34,9 @@ export default function EventPageTemplate({
     videoUrl,
     posterLeftSrc,
     posterRightSrc,
+    posterLeftHref,
+    posterRightHref,
+    topLabel,
     children
 }: EventPageTemplateProps) {
     const [lightboxImg, setLightboxImg] = useState<string | null>(null);
@@ -64,11 +70,23 @@ export default function EventPageTemplate({
 
                 {/* Text Group */}
                 <div className="text-center space-y-8 max-w-4xl mx-auto">
-                    <div className="mb-8">
-                        <span className="text-cyan-400 font-mono text-sm tracking-widest">{date}</span>
-                        <span className="mx-2 text-white/20">|</span>
-                        <span className="text-gray-400 text-sm">{location}</span>
-                    </div>
+                    {/* Date / Separator (Only if provided) */}
+                    {(date || location) && (date !== "" || location !== "") && (
+                        <div className="mb-8">
+                            {date && <span className="text-cyan-400 font-mono text-sm tracking-widest">{date}</span>}
+                            {date && location && <span className="mx-2 text-white/20">|</span>}
+                            {location && <span className="text-gray-400 text-sm">{location}</span>}
+                        </div>
+                    )}
+
+                    {/* Top Label (e.g. Prize) */}
+                    {topLabel && (
+                        <div className="mb-4">
+                            {topLabel}
+                        </div>
+                    )}
+
+
 
                     <h1 className="text-5xl md:text-8xl font-bold tracking-tighter drop-shadow-2xl">
                         <ShinyText
@@ -95,12 +113,27 @@ export default function EventPageTemplate({
 
                         {/* Left Poster */}
                         {posterLeftSrc && (
-                            <img
-                                src={posterLeftSrc}
-                                alt="Event Poster Left"
-                                className="h-64 xl:h-[378px] w-auto rounded-xl shadow-[0_0_30px_rgba(0,255,255,0.2)] transition-transform duration-300 hover:scale-[1.2] cursor-zoom-in z-20 relative object-cover"
-                                onClick={() => setLightboxImg(posterLeftSrc)}
-                            />
+                            posterLeftHref ? (
+                                <a
+                                    href={posterLeftHref}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="z-20 relative block"
+                                >
+                                    <img
+                                        src={posterLeftSrc}
+                                        alt="Event Poster Left"
+                                        className="h-64 xl:h-[378px] w-auto rounded-xl shadow-[0_0_30px_rgba(0,255,255,0.2)] transition-transform duration-300 hover:scale-[1.2] cursor-pointer object-cover"
+                                    />
+                                </a>
+                            ) : (
+                                <img
+                                    src={posterLeftSrc}
+                                    alt="Event Poster Left"
+                                    className="h-64 xl:h-[378px] w-auto rounded-xl shadow-[0_0_30px_rgba(0,255,255,0.2)] transition-transform duration-300 hover:scale-[1.2] cursor-zoom-in z-20 relative object-cover"
+                                    onClick={() => setLightboxImg(posterLeftSrc)}
+                                />
+                            )
                         )}
 
                         {/* Video */}
@@ -120,12 +153,27 @@ export default function EventPageTemplate({
 
                         {/* Right Poster */}
                         {posterRightSrc && (
-                            <img
-                                src={posterRightSrc}
-                                alt="Event Poster Right"
-                                className="h-64 xl:h-[378px] w-auto rounded-xl shadow-[0_0_30px_rgba(0,255,255,0.2)] transition-transform duration-300 hover:scale-[1.2] cursor-zoom-in z-20 relative object-cover"
-                                onClick={() => setLightboxImg(posterRightSrc)}
-                            />
+                            posterRightHref ? (
+                                <a
+                                    href={posterRightHref}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="z-20 relative block"
+                                >
+                                    <img
+                                        src={posterRightSrc}
+                                        alt="Event Poster Right"
+                                        className="h-64 xl:h-[378px] w-auto rounded-xl shadow-[0_0_30px_rgba(0,255,255,0.2)] transition-transform duration-300 hover:scale-[1.2] cursor-pointer object-cover"
+                                    />
+                                </a>
+                            ) : (
+                                <img
+                                    src={posterRightSrc}
+                                    alt="Event Poster Right"
+                                    className="h-64 xl:h-[378px] w-auto rounded-xl shadow-[0_0_30px_rgba(0,255,255,0.2)] transition-transform duration-300 hover:scale-[1.2] cursor-zoom-in z-20 relative object-cover"
+                                    onClick={() => setLightboxImg(posterRightSrc)}
+                                />
+                            )
                         )}
                     </div>
                 )}

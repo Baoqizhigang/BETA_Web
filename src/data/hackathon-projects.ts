@@ -297,8 +297,8 @@ export const projectsData: ProjectDetails[] = [
         themeColor: "#26F0FF", // Cyan
         description: "What separates a wandering path from a legendary journey? Not just talent, but direction.By digitizing career counseling, Orienta empowers users to make data-driven amazing professional decisions.",
 
-        // 暂时使用参赛选手自己提交的演示视频
-        videoUrl: "https://drive.google.com/file/d/1e5UIWqxGlSFLCCKh2N9gKlUVq2m5fmbl/view?t=134",
+        // 暂时使用 scoop 页面视频作为占位符
+        videoUrl: "https://www.youtube.com/embed/enrIyX4Btks?si=tGJfySd4Hj-DyAr1",
 
         // 电子奖状配置
         certificateImage: "/images/ScoopAIHackathon/certificates/09-orienta.png",
@@ -331,8 +331,8 @@ export const projectsData: ProjectDetails[] = [
         themeColor: "#26F0FF", // Cyan
         description: "AI agents can not efficiently transact with each other—each integration requires custom API work, fixed pricing with no negotiation, and manual orchestration across multiple services. We have created a marketplace where agents list their capabilities with flexible pricing, and our broker automatically discovers, negotiates, and orchestrates multi-agent workflows. This transforms agent commerce from expensive point-to-point integrations into an intelligent, cost-optimized network.",
 
-        // 暂时使用参赛选手自己提交的演示视频
-        videoUrl: "https://drive.google.com/file/d/14cu7umpEWsvRWSgcvT-PE9J43W5ZYWoy/view?usp=sharing",
+        // 暂时使用 scoop 页面视频作为占位符
+        videoUrl: "https://www.youtube.com/embed/enrIyX4Btks?si=tGJfySd4Hj-DyAr1",
 
         // 电子奖状配置
         certificateImage: "/images/ScoopAIHackathon/certificates/10-agent-gig.png",
@@ -366,8 +366,8 @@ export const projectsData: ProjectDetails[] = [
         themeColor: "#26F0FF", // Cyan
         description: "Neo-Nexus solves the 'Tragedy of the Commons' in blockchain governance by automating the complex voting process for token holders. Our AI agent acts as a 'Yield Recovery Engine,' identifying over $20 billion in potential annual waste across the crypto market and capturing it instantly. We create a virtuous cycle that turns user apathy into network security and tangible financial returns.",
 
-        // 暂时使用参赛选手自己提交的演示视频
-        videoUrl: "https://drive.google.com/file/d/12F0wnRCtlOLDhCOeSH1bSamhwm4U8zEz/view?usp=sharing",
+        // 暂时使用 scoop 页面视频作为占位符
+        videoUrl: "https://www.youtube.com/embed/enrIyX4Btks?si=tGJfySd4Hj-DyAr1",
 
         // 电子奖状配置
         certificateImage: "/images/ScoopAIHackathon/certificates/11-neo-nexus.png",
