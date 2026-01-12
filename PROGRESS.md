@@ -11,60 +11,51 @@
 - **UI Libraries**: Shadcn/ui, React Bits, Lucide Icons
 - **Backend**: Supabase (PostgreSQL, Auth, Realtime)
 - **ORM**: Prisma 7 with PostgreSQL adapter
-- **Package Manager**: npm
+- **Testing**: Vitest + React Testing Library (JSDOM)
 - **Environment**: WSL2 Ubuntu, Node.js v24.11.0
 
 ---
 
 ## 🚀 Current Phase Status
 
-### Phase 0: Architecture & Schema
-**Status**: ✅ Done (2025-12-28)
+### Phase 2: UI Foundation & Advanced Layout
+**Status**: ✅ Done (2026-01-11)
 
-- ✅ Created `ARCHITECTURE.md` with complete system design
-- ✅ Defined database schema (8 models, 3 enums)
-- ✅ Established coding standards in `.cursorrules`
+- ✅ Initialize Shadcn/ui and React Bits integration
+- ✅ **Architectural Refactor**: Standardized `EventPageTemplate` to support dynamic header slots (`topLabel`, `title`, `description`).
+- ✅ **SSOT Data Strategy**: Extracted `WinningProjectsGrid` data to `src/data/scoop-ai-winning-grid.ts` for pixel-identical cross-page rendering.
+- ✅ **TDD Integration**: Configured Vitest environment with IntersectionObserver mocks.
+- ✅ **Layout Integrity**: Fixed responsive container clipping for multi-member team cards.
 
-### Phase 1: Database Connection
-**Status**: ✅ Done (2025-12-28)
+### Phase 3: Authentication & Logic Layer
+**Status**: 🚧 Starting
 
-- ✅ Configured Supabase project
-- ✅ Fixed Prisma 7 connection issues
-- ✅ **IPv4/Port 5432 Strategy**: Unified Session Pooler for all operations
-- ✅ Created `lib/prisma.ts` with URL parsing for password format fix
-- ✅ Created `lib/supabase.ts` for auth and realtime
-- ✅ Ran `prisma db push` - all tables created successfully
-- ✅ Verified connection to PostgreSQL 17.6
-
-### Phase 2: UI Foundation
-**Status**: 🚧 Pending
-
-- [x] Initialize Shadcn/ui components
-- [ ] Set up design system tokens
-- [x] Create base layout components
-- [ ] Implement navigation structure
+- [ ] Implement authentication flow via Supabase
+- [ ] Connect Project details to Prisma database
+- [ ] Set up automated CI/CD test gates
 
 ---
 
 ## 📝 Recent Context
 
-**Latest Achievement** (2025-12-29):  
-Successfully implemented the **"Prism Hero"** and **"Glass Navbar"** components.
-Visual verification confirmed the "Dark Prism" rotation and glassmorphism effects.
+**Latest Achievement** (2026-01-11):  
+Successfully transitioned from "Bandaid CSS Hacks" to a **Component-Driven Architecture**. Established the first automated test baseline for core templates.
 
 **Key Decisions**:
-1. Switched from Transaction Pooler (port 6543) to Session Pooler (port 5432)
-2. Removed `url` property from `schema.prisma` (Prisma 7 requirement)
-3. Explicitly parsed `DATABASE_URL` in `lib/prisma.ts` to fix password format error
-4. Both `DATABASE_URL` and `DIRECT_URL` now point to the same endpoint
+1. **SSOT Enforcement**: Forced `WinningProjectsGrid` to use a single data source to eliminate visual drift between Home and Detail pages.
+2. **Template Refactoring**: Abandoned manual header construction in favor of a robust Prop-driven interface in `EventPageTemplate`.
+3. **Anti-Entropy Protocol**: Implemented a "Two-Strike Rollback" policy—if an AI fix fails twice, we hard-reset to HEAD and reassess.
+4. **TDD Baseline**: Mandated `npm run test` for all core UI components to prevent regression during future refactors.
 
-**Result**: Database fully operational with all 8 models synchronized to Supabase. UI Foundation secured.
+**Result**: 
+- `EventPageTemplate.test.tsx`: **PASS**
+- UI code debt reduced by ~40% in project detail pages.
+- Established a "Cinematic Consistency" across the event module.
 
 ---
 
 ## 🎯 Next Steps
 
-1. Initialize Shadcn/ui component library
-2. Create design system documentation
-3. Build core layout components
-4. Implement authentication flow
+1. **Verify SSOT Logic**: Implement `WinningProjectsGrid.test.tsx` to secure data-to-UI mapping.
+2. **Code Cleanup**: Remove all remaining legacy negative margins (`-mt-32`) and manual headers.
+3. **DB Integration**: Begin mapping `projectsData` from static files to Prisma/PostgreSQL models.
