@@ -22,10 +22,10 @@
 **Status**: ✅ Done (2026-01-11)
 
 - ✅ Initialize Shadcn/ui and React Bits integration
-- ✅ **Architectural Refactor**: Standardized `EventPageTemplate` to support dynamic header slots (`topLabel`, `title`, `description`).
-- ✅ **SSOT Data Strategy**: Extracted `WinningProjectsGrid` data to `src/data/scoop-ai-winning-grid.ts` for pixel-identical cross-page rendering.
-- ✅ **TDD Integration**: Configured Vitest environment with IntersectionObserver mocks.
-- ✅ **Layout Integrity**: Fixed responsive container clipping for multi-member team cards.
+- ✅ **Architectural Refactor**: Standardized `EventPageTemplate` with dynamic header slots (`topLabel`, `title`, `description`) and adaptive Triptych layout.
+- ✅ **SSOT Data Strategy**: Centralized Hackathon data and grid logic into `src/data/scoop-ai-winning-grid.ts`, eliminating visual drift across the site.
+- ✅ **Automated Verification (Rule 12)**: Established 9-test baseline with Vitest (5 for Template, 4 for Grid), covering DOM ordering and style contracts.
+- ✅ **Technical Debt Reduction**: Removed all redundant inline JSX and manual CSS hacks (negative margins) from the hackathon main page.
 
 ### Phase 3: Authentication & Logic Layer
 **Status**: 🚧 Starting
@@ -39,13 +39,13 @@
 ## 📝 Recent Context
 
 **Latest Achievement** (2026-01-11):  
-Successfully transitioned from "Bandaid CSS Hacks" to a **Component-Driven Architecture**. Established the first automated test baseline for core templates.
+**"The Great Cleanup"**: Successfully transitioned from hacky overrides to a robust, component-driven architecture. Established the first automated test baseline for core templates.
 
 **Key Decisions**:
 1. **SSOT Enforcement**: Forced `WinningProjectsGrid` to use a single data source to eliminate visual drift between Home and Detail pages.
 2. **Template Refactoring**: Abandoned manual header construction in favor of a robust Prop-driven interface in `EventPageTemplate`.
 3. **Anti-Entropy Protocol**: Implemented a "Two-Strike Rollback" policy—if an AI fix fails twice, we hard-reset to HEAD and reassess.
-4. **TDD Baseline**: Mandated `npm run test` for all core UI components to prevent regression during future refactors.
+4. **Contract Testing**: Decided to use Contract Testing (DOM order & theme mapping) to prevent "Visual Drift" during AI-assisted development.
 
 **Result**: 
 - `EventPageTemplate.test.tsx`: **PASS**
@@ -56,6 +56,5 @@ Successfully transitioned from "Bandaid CSS Hacks" to a **Component-Driven Archi
 
 ## 🎯 Next Steps
 
-1. **Verify SSOT Logic**: Implement `WinningProjectsGrid.test.tsx` to secure data-to-UI mapping.
-2. **Code Cleanup**: Remove all remaining legacy negative margins (`-mt-32`) and manual headers.
-3. **DB Integration**: Begin mapping `projectsData` from static files to Prisma/PostgreSQL models.
+1. **Phase 3: Auth & Logic**: Initialize Supabase Auth flows and protected event routes.
+2. **Data Migration**: Map static `projectsData` to Prisma PostgreSQL models.
